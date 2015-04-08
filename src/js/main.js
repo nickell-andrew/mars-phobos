@@ -1,3 +1,4 @@
+console.log("I rebuilt");
 var webgl, gui;
 
 $(document).ready(init);
