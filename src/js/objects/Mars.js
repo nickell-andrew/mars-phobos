@@ -1,13 +1,13 @@
-var Phobos = (function(){
+var Mars = (function(){
 
-    function Phobos(){
+    function Mars(){
         THREE.Object3D.call(this);
 
-        var texture = new THREE.ImageUtils.loadTexture('phobos2k.jpg');
-        var bumpMap = new THREE.ImageUtils.loadTexture('phobosbump.jpg');
+        var texture = new THREE.ImageUtils.loadTexture('marsmap2k.jpg');
+        var bumpMap = new THREE.ImageUtils.loadTexture('marsbump2k.jpg');
         var geometry = new THREE.SphereGeometry(150, 200, 200);
         var material = new THREE.MeshPhongMaterial({
-          color: 0x888888, 
+          color: 0x552222, 
           map: texture,
           bumpMap: bumpMap,
           bumpScale: 10,
@@ -17,12 +17,12 @@ var Phobos = (function(){
         this.add(this.mesh);
     }
 
-    Phobos.prototype = new THREE.Object3D;
-    Phobos.prototype.constructor = Phobos;
+    Mars.prototype = new THREE.Object3D;
+    Mars.prototype.constructor = Mars;
 
-    Phobos.prototype.update = function() {
+    Mars.prototype.update = function() {
         this.mesh.rotation.y += 0.01;
     };
 
-    return Phobos;
+    return Mars;
 })();
