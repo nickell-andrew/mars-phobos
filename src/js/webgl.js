@@ -4,7 +4,7 @@ var Webgl = (function(){
         // Basic three.js setup
         this.scene = new THREE.Scene();
         
-        this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000);
+        this.camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
         this.camera.position.z = 500;
 
         this.renderer = new THREE.WebGLRenderer();
@@ -48,6 +48,8 @@ var Webgl = (function(){
       this.camera.position.set(pos.x, pos.y, pos.z);
       
     } 
+    
+  
     
 
     Webgl.prototype.resize = function(width, height) {

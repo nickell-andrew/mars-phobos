@@ -5,12 +5,12 @@ var Moon = (function(){
 
         var texture = new THREE.ImageUtils.loadTexture('moonmap2k.jpg');
         var bumpMap = new THREE.ImageUtils.loadTexture('moonbump2k.jpg');
-        var geometry = new THREE.SphereGeometry(150, 200, 200);
+        var geometry = new THREE.SphereGeometry(.1, 100, 100);
         var material = new THREE.MeshPhongMaterial({
           color: 0x444444, 
           map: texture,
           bumpMap: bumpMap,
-          bumpScale: 1,
+          bumpScale: .2,
           shininess: .000000000001
         });
         this.mesh = new THREE.Mesh(geometry, material);
@@ -19,9 +19,7 @@ var Moon = (function(){
 
     Moon.prototype = new THREE.Object3D;
     Moon.prototype.constructor = Moon;
-    Moon.prototype.setMoonPosition = function(pos) {
-      this.position.set(pos.x, pos.y, pos.z);
-    };
+   
     Moon.prototype.update = function() {
         this.mesh.rotation.y += 0.01;
     };
