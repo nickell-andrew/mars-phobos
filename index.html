@@ -20,6 +20,10 @@
 
 <!--First Step: create a Mars object (based on phobos) and add it to the scene
 
-Second Step: add three new methods (i.e. Webgl.prototype.blah functions that can use this inside them) to Webgl.    Webgl.prototype.setPhobosPosition(pos), Webgl.prototype.setMarsPosition(pos), Webgl.prototype.setCameraPosition(pos).     pos should be an object with .x, .y, and .z props, for example pos = { x: 5, y: 10, z: 0.5 }
+Second Step: add three new methods (i.e. Webgl.prototype.blah functions that can use this inside them) to Webgl.  
+
+Webgl.prototype.setPhobosPosition(pos), Webgl.prototype.setMarsPosition(pos), Webgl.prototype.setCameraPosition(pos).     pos should be an object with .x, .y, and .z props, for example pos = { x: 5, y: 10, z: 0.5 }
+
+
 [4/9/15, 1:47:16 PM] Seth Nickell: Third Step: use your new methods to put Mars at { x: 0, y:0, z: 0 }, Phobos at { x: 1, y: 0: z: 0 }, and the Camera at { x: 0, y: 0, z: 2 }.  Now adjust the camera FOV, zoom, etc in the Webgl constructor so the 3D projection is at a good depth, and the scene is reasonably sized
 [4/9/15, 1:48:45 PM] Seth Nickell: Let me know if you guys get to Step 3 today, and I’ll write out Step 4 and 5 (which is where the physics and animation come in!)-->

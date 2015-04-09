@@ -23,6 +23,8 @@ var Webgl = (function(){
         light1.position.x = this.camera.position.x;
         light1.position.y = this.camera.position.y;
 				this.scene.add( light1 );
+        
+
 
         // Or create container classes for them to simplify your code
         this.someOtherObject = new Moon();
@@ -31,6 +33,22 @@ var Webgl = (function(){
         
         console.log('Webgl Run');
     }
+
+    // New Methods
+
+    Webgl.prototype.setMoonPosition = function(pos) {
+      this.someOtherObject.position.set(pos.x, pos.y, pos.z);
+      
+    } 
+    Webgl.prototype.setMarsPosition = function(pos) {
+      this.someObject.position.set(pos.x, pos.y, pos.z);
+      
+    } 
+    Webgl.prototype.setCameraPosition = function(pos) {
+      this.camera.position.set(pos.x, pos.y, pos.z);
+      
+    } 
+    
 
     Webgl.prototype.resize = function(width, height) {
         this.camera.aspect = width / height;

@@ -19,7 +19,9 @@ var Moon = (function(){
 
     Moon.prototype = new THREE.Object3D;
     Moon.prototype.constructor = Moon;
-
+    Moon.prototype.setMoonPosition = function(pos) {
+      this.position.set(pos.x, pos.y, pos.z);
+    };
     Moon.prototype.update = function() {
         this.mesh.rotation.y += 0.01;
     };
