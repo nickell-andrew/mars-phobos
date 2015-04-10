@@ -17,7 +17,7 @@ var Webgl = (function(){
         this.scene.add(this.someObject);
         
         var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
-        light1 = new THREE.PointLight( 0xffffff, 7, 500, 2 );
+        var light1 = new THREE.PointLight( 0xffffff, 7, 500, 2 );
         light1.add( new THREE.Mesh( Moon , new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
         light1.position.z = this.camera.position.z/2;
         light1.position.x = this.camera.position.x;
