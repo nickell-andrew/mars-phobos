@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var babel = require('gulp-babel');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
@@ -7,8 +8,9 @@ var watch = require('gulp-watch');
 gulp.task('javascript', function() {
     gulp.src('src/js/**/*.js')
         .pipe(sourcemaps.init({loadMaps: true}))
-            .pipe(concat('app.min.js'))
-            /*.pipe(uglify())*/
+        .pipe(babel())
+        .pipe(concat('app.min.js'))
+        /*.pipe(uglify())*/
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('build'));
 });
