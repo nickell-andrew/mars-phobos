@@ -1,6 +1,7 @@
 // adapted from https://jsfiddle.net/24mg6ctg/12/
 
 var Physics = (function(){
+  var gravity = 0.5;
   
   var Vector = function (x, y) {
       this.x = x || 0;
@@ -222,7 +223,7 @@ var Physics = (function(){
           p3.c.set(p3.c.add(p3.v.mul(0.5 * dt)));
       }
       do_collisions(particles);
-  }
+  }  
   
   return {
     createParticle: function (x, y, radius) {
