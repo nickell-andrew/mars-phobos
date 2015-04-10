@@ -3,6 +3,8 @@ import THREE from 'three';
 
 var webgl, gui;
 
+window.webgl = webgll;
+
 $(document).ready(init);
 
 function init(){
