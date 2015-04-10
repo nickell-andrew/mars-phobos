@@ -1,3 +1,8 @@
+import Physics from './physics.js';
+import Mars from './objects/Mars.js';
+import Moon from './objects/Moon.js';
+import THREE from 'three';
+
 var Webgl = (function(){
 
     function Webgl(width, height){
@@ -31,7 +36,7 @@ var Webgl = (function(){
         this.someOtherObject.position.set(150, 0, 0);
         this.scene.add(this.someOtherObject);
         
-        console.log('Webgl Run');
+        console.log('Webgl runnning...');
     }
 
     // New Methods
@@ -70,3 +75,5 @@ var Webgl = (function(){
     return Webgl;
 
 })();
+
+export default Webgl;

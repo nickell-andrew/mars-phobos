@@ -1,4 +1,6 @@
-console.log("I rebuilt");
+import Webgl from './webgl.js';
+import THREE from 'three';
+
 var webgl, gui;
 
 $(document).ready(init);

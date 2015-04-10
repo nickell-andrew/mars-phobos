@@ -1,3 +1,5 @@
+import THREE from 'three';
+
 var Mars = (function(){
 
     function Mars(){
@@ -26,3 +28,5 @@ var Mars = (function(){
 
     return Mars;
 })();
+
+export default Mars;

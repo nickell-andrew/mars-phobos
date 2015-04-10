@@ -9,13 +9,17 @@
   "main": "src/js/main.js",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.4.0",
+    "babel-loader": "^5.0.0",
+    "bower-webpack-plugin": "^0.1.8",
+    "component-webpack-plugin": "^0.2.1",
+    "extract-text-webpack-plugin": "^0.5.0",
+    "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
-    "gulp-concat": "~2.4.1",
-    "gulp-sourcemaps": "^1.2.4",
-    "gulp-uglify": "~1.0.1",
+    "gulp-util": "^3.0.4",
     "gulp-watch": "^1.1.0",
-    "gulp-webserver": "^0.9.0"
+    "three": "^0.70.0",
+    "webpack": "^1.8.4",
+    "webpack-dev-server": "^1.8.0"
   },
   "author": "Guillaume Gouessan",
   "license": "BSD-2-Clause"

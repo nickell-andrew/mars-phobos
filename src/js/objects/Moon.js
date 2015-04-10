@@ -1,3 +1,5 @@
+import THREE from 'three';
+
 var Moon = (function(){
 
     function Moon(){
@@ -26,3 +28,5 @@ var Moon = (function(){
 
     return Moon;
 })();
+
+export default Moon;
