@@ -4,12 +4,12 @@ var Webgl = (function(){
         // Basic three.js setup
         this.scene = new THREE.Scene();
         
-        this.camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
+        this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 10);
         this.camera.position.z = 500;
 
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(width, height);
-        this.renderer.setClearColor(0x770055);
+        this.renderer.setClearColor(0x000000);
 
         // Directly add objects
         this.someObject = new Mars();

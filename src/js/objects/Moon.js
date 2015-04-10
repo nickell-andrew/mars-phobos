@@ -5,12 +5,12 @@ var Moon = (function(){
 
         var texture = new THREE.ImageUtils.loadTexture('moonmap2k.jpg');
         var bumpMap = new THREE.ImageUtils.loadTexture('moonbump2k.jpg');
-        var geometry = new THREE.SphereGeometry(.1, 100, 100);
+        var geometry = new THREE.SphereGeometry(.05, 100, 100);
         var material = new THREE.MeshPhongMaterial({
           color: 0x444444, 
           map: texture,
           bumpMap: bumpMap,
-          bumpScale: .2,
+          bumpScale: .000001,
           shininess: .000000000001
         });
         this.mesh = new THREE.Mesh(geometry, material);
