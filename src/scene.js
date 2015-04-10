@@ -1,4 +1,5 @@
 import Physics from './physics.js';
+window.lion.Physics = Physics;
 import Mars from './objects/Mars.js';
 import Moon from './objects/Moon.js';
 import THREE from 'three';
@@ -15,9 +16,9 @@ function Scene (width, height){
   this.renderer.setClearColor(0x000000);
 
   // Directly add objects
-  this.someObject = new Mars();
-  this.someObject.position.set(-150, 0, 0);
-  this.scene.add(this.someObject);
+  this.planet = new Mars();
+  this.planet.position.set(-150, 0, 0);
+  this.scene.add(this.planet);
     
   var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
   var light1 = new THREE.PointLight( 0xffffff, 7, 500, 2 );
@@ -30,9 +31,9 @@ function Scene (width, height){
 
 
   // Or create container classes for them to simplify your code
-  this.someOtherObject = new Moon();
-  this.someOtherObject.position.set(150, 0, 0);
-  this.scene.add(this.someOtherObject);
+  this.moon = new Moon();
+  this.moon.position.set(150, 0, 0);
+  this.scene.add(this.moon);
     
   this.setMarsPosition({x:0, y:0, z:0});
   this.setMoonPosition({x:1, y:0, z:0});
@@ -44,11 +45,11 @@ function Scene (width, height){
 // New Methods
 
 Scene.prototype.setMoonPosition = function(pos) {
-  this.someOtherObject.position.set(pos.x, pos.y, pos.z);
+  this.moon.position.set(pos.x, pos.y, pos.z);
   
 } 
 Scene.prototype.setMarsPosition = function(pos) {
-  this.someObject.position.set(pos.x, pos.y, pos.z);
+  this.planet.position.set(pos.x, pos.y, pos.z);
   
 } 
 Scene.prototype.setCameraPosition = function(pos) {
@@ -65,10 +66,10 @@ Scene.prototype.resize = function(width, height) {
 Scene.prototype.render = function() {    
   this.renderer.render(this.scene, this.camera);
 
-  this.someObject.rotation.y += 0.01;
-  this.someObject.rotation.x += 0.01;
+  this.planet.rotation.y += 0.01;
+  this.planet.rotation.x += 0.01;
 
-  this.someOtherObject.update();
+  this.moon.update();
 }
 
 
