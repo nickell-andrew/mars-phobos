@@ -34,7 +34,11 @@ function Scene (width, height){
   this.someOtherObject.position.set(150, 0, 0);
   this.scene.add(this.someOtherObject);
     
-  console.log('Webgl runnning...');
+  this.setMarsPosition({x:0, y:0, z:0});
+  this.setMoonPosition({x:1, y:0, z:0});
+  this.setCameraPosition({x:0, y:0, z:2});    
+    
+  console.log('Scene runnning...');
 }
 
 // New Methods
