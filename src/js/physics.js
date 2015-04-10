@@ -1,4 +1,5 @@
 // adapted from https://jsfiddle.net/24mg6ctg/12/
+// this might be a better source for a 3D simulation: https://github.com/stefano-meschiari/WhenGiantsCollide
 
 var Physics = (function(){
   var gravity = 0.5;
