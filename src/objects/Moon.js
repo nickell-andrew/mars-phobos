@@ -21,7 +21,7 @@ Moon.prototype = new THREE.Object3D;
 Moon.prototype.constructor = Moon;
    
 Moon.prototype.update = function() {
-  this.mesh.rotation.y += 0.01;
+  this.mesh.rotation.y += .0003 ;
 };
 
 export default Moon;
