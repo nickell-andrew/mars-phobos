@@ -3,8 +3,6 @@ import THREE from 'three';
 
 var scene, gui;
 
-window.lion = {};
-
 $(document).ready(init);
 
 function init(){
