@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
+var webserver = require('gulp-webserver');
 
 gulp.task('javascript', function() {
     gulp.src('src/js/**/*.js')
@@ -32,5 +33,14 @@ gulp.task('watch', function() {
         gulp.start('vendors');
     });
 });
+ 
+gulp.task('webserver', function() {
+  gulp.src('.')
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: true,
+      open: true
+    }));
+});
 
-gulp.task('default', ['javascript', 'vendors', 'watch'], function(){});
+gulp.task('default', ['javascript', 'vendors', 'watch', 'webserver'], function(){});
