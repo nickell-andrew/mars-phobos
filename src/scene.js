@@ -35,7 +35,7 @@ function Scene (width, height){
   this.moon.position.set(150, 0, 0);
   this.scene.add(this.moon);
     
-  this.setMarsPosition({x:0, y:0, z:0});
+  this.setPlanetPosition({x:0, y:0, z:0});
   this.setMoonPosition({x:1, y:0, z:0});
   this.setCameraPosition({x:0, y:0, z:2});    
     
@@ -46,15 +46,14 @@ function Scene (width, height){
 
 Scene.prototype.setMoonPosition = function(pos) {
   this.moon.position.set(pos.x, pos.y, pos.z);
-  
+  this.moon.particle.setPosition(pos);
 } 
-Scene.prototype.setMarsPosition = function(pos) {
+Scene.prototype.setPlanetPosition = function(pos) {
   this.planet.position.set(pos.x, pos.y, pos.z);
-  
+  this.planet.particle.setPosition(pos);
 } 
 Scene.prototype.setCameraPosition = function(pos) {
   this.camera.position.set(pos.x, pos.y, pos.z);
-  
 }
 
 Scene.prototype.resize = function(width, height) {
@@ -62,6 +61,13 @@ Scene.prototype.resize = function(width, height) {
   this.camera.updateProjectionMatrix();
   this.renderer.setSize(width, height);
 }
+
+Scene.prototype.tickPhysics = function () {
+  Physics.tick([this.planet.particle, this.moon.particle]);
+  this.setMoonPosition( this.moon.particle.getPosition() );
+  this.setPlanetPosition( this.planet.particle.getPosition() );
+}
+
 
 Scene.prototype.render = function() {    
   this.renderer.render(this.scene, this.camera);

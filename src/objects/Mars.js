@@ -1,12 +1,12 @@
 import THREE from 'three';
-
+import Physics from '../physics.js';
   
 function Mars(){
   THREE.Object3D.call(this);
-
+  var radius = 0.2;
   var texture = new THREE.ImageUtils.loadTexture('images/textures/marsmap2k.jpg');
   var bumpMap = new THREE.ImageUtils.loadTexture('images/textures/marsbump2k.jpg');
-  var geometry = new THREE.SphereGeometry(.2, 100, 100);
+  var geometry = new THREE.SphereGeometry(radius, 100, 100);
   var material = new THREE.MeshPhongMaterial({
     color: 0x552222, 
     map: texture,
@@ -16,6 +16,7 @@ function Mars(){
   });
   this.mesh = new THREE.Mesh(geometry, material);
   this.add(this.mesh);
+  this.particle = Physics.createParticle({x:0,y:0,z:0}, radius);
 }
 
 Mars.prototype = new THREE.Object3D;
@@ -24,6 +25,5 @@ Mars.prototype.constructor = Mars;
 Mars.prototype.update = function() {
   this.mesh.rotation.y += 0.01;
 };
-
 
 export default Mars;

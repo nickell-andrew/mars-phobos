@@ -151,6 +151,10 @@ Particle.prototype.getPosition = function () {
   }
 }
 
+Particle.prototype.setPosition = function (pos) {
+  this.c.x = pos.x;
+  this.c.y = pos.y;
+}
 
 function checkCCCol(a, b) {
     var d = a.c.sub(b.c);
@@ -235,9 +239,9 @@ function do_physics(dt, particles) {
 }  
 
 export default {
-  createParticle: function (x, y, z, radius) {
+  createParticle: function (pos, radius) {
     radius = radius | Math.random() * 10 + 15;
-    return new Particle(new Vector(x,y), radius, 0.95, 0.95);
+    return new Particle(new Vector(pos.x,pos.y), radius, 0.95, 0.95);
   },
   tick: function (particles) {
     for (var k = 0; k < 4; k++) { // increase the greater than value to increase simulation step rate

@@ -8,7 +8,8 @@ $(document).ready(init);
 function init(){
   scene = new Scene(window.innerWidth, window.innerHeight);
   $('.three').append(scene.renderer.domElement);
-
+  window.lion.scene = scene;
+  
   gui = new dat.GUI();
   gui.close();
 
