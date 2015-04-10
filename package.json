@@ -20,6 +20,6 @@
     "webpack": "^1.8.4",
     "webpack-dev-server": "^1.8.0"
   },
-  "author": "Guillaume Gouessan",
+  "author": "Andrew Nickell and Sam Khun",
   "license": "BSD-2-Clause"
 }
