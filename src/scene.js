@@ -62,20 +62,40 @@ Scene.prototype.resize = function(width, height) {
   this.renderer.setSize(width, height);
 }
 
-Scene.prototype.tickPhysics = function () {
+Scene.prototype.updateParticlePositionsUsingPhysics = function (milliseconds) {
   Physics.tick([this.planet.particle, this.moon.particle]);
+
+}
+
+Scene.prototype.updatePositionsFromParticles = function () {
   this.setMoonPosition( this.moon.particle.getPosition() );
   this.setPlanetPosition( this.planet.particle.getPosition() );
 }
 
+Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
+  
+  var percentThroughCurrentCycle = function() {
+    return (milliseconds % 1000) / 1000;
+  }
+  
+  var moonY = Math.sin(percentThroughCurrentCycle() * 2 * Math.PI);
+  var moonPos = {x:1 , y: moonY, z:0};
+  this.moon.particle.setPosition(moonPos);
+}
 
-Scene.prototype.render = function() {    
+Scene.prototype.render = function(milliseconds) {    
+  // this.updateParticlePositionsUsingPhysics(milliseconds);
+  this.updateParticlePositionsNoPhysics(milliseconds);
+  this.updatePositionsFromParticles();
+  
   this.renderer.render(this.scene, this.camera);
-
+  
   this.planet.rotation.y += 0.01;
   this.planet.rotation.x += 0.01;
 
   this.moon.update();
+  
+  
 }
 
 
