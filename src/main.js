@@ -23,8 +23,8 @@ function resizeHandler() {
   scene.resize(window.innerWidth, window.innerHeight);
 }
 
-function animate() {
+function animate(milliseconds) {
   requestAnimationFrame(animate);
-  scene.render();
-    
+  scene.render(milliseconds);
+
 }
