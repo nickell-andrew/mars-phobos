@@ -5,3 +5,19 @@ body, html {
     padding: 0;
     overflow: hidden;
 }
+#controls {
+  position: fixed;
+  left: 0 px;
+  top: 0 px;
+  background-color: #777777;
+  padding: 10px;
+  border: 2px solid #999999;
+  border-radius: 0 0 3px 3px;
+}
+#update {
+  position: relative;
+  top: 5px;
+  left: 100px;
+  margin: 0 auto;
+  padding: 0 10px 0 10px;
+}
