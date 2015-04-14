@@ -43,6 +43,10 @@ function Scene (width, height){
 }
 
 // New Methods
+Scene.prototype.youClickedMe = function () {
+  console.log('You clicked me');
+}
+
 
 Scene.prototype.setMoonPosition = function(pos) {
   this.moon.position.set(pos.x, pos.y, pos.z);
@@ -62,7 +66,7 @@ Scene.prototype.resize = function(width, height) {
   this.renderer.setSize(width, height);
 }
 
-Scene.prototype.updateParticlePositionsUsingPhysics = function (milliseconds) {
+Scene.prototype.updateParticlePositionsPhysics = function (milliseconds) {
   Physics.tick([this.planet.particle, this.moon.particle]);
 
 }
@@ -77,25 +81,56 @@ Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
   var percentThroughCurrentCycle = function(milliseconds, periodLengthMS) {
     return (milliseconds % periodLengthMS)  / periodLengthMS;
   }
-  
-  var percentThroughCurrentCyclePlanet = function() {
-    return ((milliseconds % 3000) / 3000);
-  }
+  var periodRadians = 2 * Math.PI;
   
   var moonX = Math.cos(
-    percentThroughCurrentCycle(milliseconds, 5000) * 2 * Math.PI
+    percentThroughCurrentCycle(milliseconds, 5000) * periodRadians
   );
   var moonY = 0.5 * Math.sin(
-    percentThroughCurrentCycle(milliseconds, 5000) * 2 * Math.PI
+    percentThroughCurrentCycle(milliseconds, 5000) * periodRadians
   );
   var moonPos = {x:moonX , y: moonY, z: 0 };
   this.moon.particle.setPosition(moonPos);
   
-  var planetPos = {x: 0 , y: 0, z: 0};
+  var periodPlanetX = this.planet.fundamentalFrequency
+    * this.planet.xHarmonic * 1000;
+  var planetX = 0.5 * Math.sin(
+    percentThroughCurrentCycle(milliseconds, periodPlanetX) * periodRadians
+  );
+  var periodPlanetY = this.planet.fundamentalFrequency
+    * this.planet.yHarmonic * 1000;
+  var planetY = 0.25 * Math.sin(
+    percentThroughCurrentCycle(milliseconds, periodPlanetY) * periodRadians
+  ); 
+  
+  
+  var planetPos = {x: planetX , y: planetY, z: 0};
   this.planet.particle.setPosition(planetPos);
 }
 
-Scene.prototype.render = function(milliseconds) {    
+Scene.prototype.setPlanetFrequenciesFromDOM = function () {
+  this.planet.fundamentalFrequency = Number(
+    $('#planet-fundamental').val()
+  );
+  console.log("Planet's fundamental frequency is: " 
+    + this.planet.fundamentalFrequency);
+    
+  this.planet.xHarmonic = Number(
+    $('#planet-x-harmonic').val()
+  );
+  console.log("Planet's 'X' harmonic is: " 
+    + this.planet.xHarmonic);
+  
+  
+  this.planet.yHarmonic = Number(
+    $('#planet-y-harmonic').val()
+  );
+  console.log("Planet's 'Y' harmonic is: " 
+    + this.planet.yHarmonic);
+  
+}
+
+Scene.prototype.render = function (milliseconds) {    
   // this.updateParticlePositionsUsingPhysics(milliseconds);
   this.updateParticlePositionsNoPhysics(milliseconds);
   this.updatePositionsFromParticles();

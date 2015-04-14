@@ -14,8 +14,10 @@ function init(){
   gui.close();
 
   $(window).on('resize', resizeHandler);
-
-  animate();
+  lion.initThis = this;
+  console.log("this is " + this);
+  $('#update').on('click', function () {window.lion.scene.setPlanetFrequenciesFromDOM()});
+  animate();  
 }
 
 
