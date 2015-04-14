@@ -74,20 +74,24 @@ Scene.prototype.updatePositionsFromParticles = function () {
 
 Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
   
-  var percentThroughCurrentCycleMoon = function() {
-    return (milliseconds % 1000) / 1000;
+  var percentThroughCurrentCycle = function(milliseconds, periodLengthMS) {
+    return (milliseconds % periodLengthMS)  / periodLengthMS;
   }
   
   var percentThroughCurrentCyclePlanet = function() {
     return ((milliseconds % 3000) / 3000);
   }
   
-  var moonY = Math.sin(percentThroughCurrentCycleMoon() * 2 * Math.PI);
-  var moonPos = {x:1 , y: moonY*.5, z: 0 };
+  var moonX = Math.cos(
+    percentThroughCurrentCycle(milliseconds, 5000) * 2 * Math.PI
+  );
+  var moonY = 0.5 * Math.sin(
+    percentThroughCurrentCycle(milliseconds, 5000) * 2 * Math.PI
+  );
+  var moonPos = {x:moonX , y: moonY, z: 0 };
   this.moon.particle.setPosition(moonPos);
   
-  var planetX = Math.sin(percentThroughCurrentCyclePlanet() * 2 * Math.PI);
-  var planetPos = {x: planetX*.5 , y: 0, z: 0};
+  var planetPos = {x: 0 , y: 0, z: 0};
   this.planet.particle.setPosition(planetPos);
 }
 
