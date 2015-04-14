@@ -1,0 +1,46 @@
+When you're done the planet will trace interesting shapes according to
+music harmonics (this will be a lot like the patterns you can make
+with an oscilloscope).
+
+1) Add an html div with the id 'controls' to the page. Use CSS to
+style the div so its in the upper left corner of the screen (use
+position: fixed, and the left and top css attributes).
+
+2) Inside #controls, put three labelled text inputs and an update
+button like so:
+
+planet fundamental freq: [ 0.5       ] hz
+planet x harmonic:  [ 3          ]
+planet y harmonic:  [ 2          ]
+
+                                  [ Update ]
+
+Give each control an html id, so you can easily refer to it from
+javascript. Set the default values as shown above.
+
+3) Add a method Scene.setPlanetFrequenciesFromDOM() which fetches the
+value of each text input, console.log()s them, and then stores them as
+properties of the planet object: this.planet.fundamentalFrequency,
+this.planet.xHarmonic, this.planet.yHarmonic
+
+4) In the Scene's construtor,  add a click event handler (hint: use
+the jQuery on function with the 'click' event) to the Update button,
+which runs setPlanetFrequenciesFromDOM()
+
+5) In your NoPhysics function, use these new planet properties to
+change the X (and Y, you'll need to extend your code to use a Sin
+function for Y too) frequencies, e.g. xFreq = fundamentalFreq *
+xHarmonic, yFreq = fundamentalFreq * yHarmonic
+
+6) Try experimenting with different values, esp common musical
+mathematical ratios from just intonation tuning. Set one axis to be
+the numerator, and the other the denominator of the musical interval.
+e.g. 5:4 (a major third) becomes x harmonic: 5, y harmonic: 4. You can
+also make the frequency very high, e.g. 60 hz, to see what happens
+when you go as fast as the eye can refresh.
+
+I think that should cover today.... but feel free to call if you guys
+get through it all and still want to do more.
+
+Tomorrow we can maybe hook up microphone input so the planet's y
+position is controlled by the microphone's waveform.
