@@ -14,9 +14,8 @@ body, html {
   font-family: monospace;
   line-height:250%;
   font-size: 75%;
-  color: #0000ff;
   padding: 13px;
-  border: 2px solid #0000ff;
+  border: 2px solid #333333;
   border-top-width: 0px;
   border-radius: 0 0 15px 0px;
 }
@@ -37,7 +36,6 @@ body, html {
   margin-right: auto;
   width:92%;
   font-family: monospace;
-  color: #0000ff;
   top: 5px;
   left: 100px;
   margin: 0 auto;
