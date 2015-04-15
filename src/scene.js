@@ -38,7 +38,8 @@ function Scene (width, height){
   this.setPlanetPosition({x:0, y:0, z:0});
   this.setMoonPosition({x:1, y:0, z:0});
   this.setCameraPosition({x:0, y:0, z:2});    
-    
+  
+  this.setPlanetFrequenciesFromDOM();  
   console.log('Scene runnning...');
 }
 
@@ -91,13 +92,7 @@ Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
   );
   var moonPos = {x:moonX , y: moonY, z: 0 };
   this.moon.particle.setPosition(moonPos);
-  
-  if (!this.planet.fundamentalFrequency 
-      || !this.planet.xHarmonic 
-      || !this.planet.yHarmonic) {
-    this.setPlanetFrequenciesFromDOM();
-  }
-  
+    
   var periodPlanetX = (1/ (this.planet.fundamentalFrequency
     * this.planet.xHarmonic)) * 1000;
   var planetX = 0.5 * Math.sin(
@@ -118,21 +113,14 @@ Scene.prototype.setPlanetFrequenciesFromDOM = function () {
   this.planet.fundamentalFrequency = Number(
     $('#planet-fundamental').val()
   );
-  console.log("Planet's fundamental frequency is: " 
-    + this.planet.fundamentalFrequency);
     
   this.planet.xHarmonic = Number(
     $('#planet-x-harmonic').val()
   );
-  console.log("Planet's 'X' harmonic is: " 
-    + this.planet.xHarmonic);
-  
-  
+    
   this.planet.yHarmonic = Number(
     $('#planet-y-harmonic').val()
   );
-  console.log("Planet's 'Y' harmonic is: " 
-    + this.planet.yHarmonic);
   
 }
 
