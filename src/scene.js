@@ -92,13 +92,13 @@ Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
   var moonPos = {x:moonX , y: moonY, z: 0 };
   this.moon.particle.setPosition(moonPos);
   
-  var periodPlanetX = this.planet.fundamentalFrequency
-    * this.planet.xHarmonic * 1000;
+  var periodPlanetX = (1/ (this.planet.fundamentalFrequency
+    * this.planet.xHarmonic)) * 1000;
   var planetX = 0.5 * Math.sin(
     percentThroughCurrentCycle(milliseconds, periodPlanetX) * periodRadians
   );
-  var periodPlanetY = this.planet.fundamentalFrequency
-    * this.planet.yHarmonic * 1000;
+  var periodPlanetY = (1/ (this.planet.fundamentalFrequency
+    * this.planet.yHarmonic)) * 1000;
   var planetY = 0.25 * Math.sin(
     percentThroughCurrentCycle(milliseconds, periodPlanetY) * periodRadians
   ); 
