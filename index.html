@@ -4,13 +4,23 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>Awesome Experiment</title>
   <link rel="stylesheet" href="styles/styles.css">
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  
   <script>
   window.lion = {};
+  
+  $(function() {
+      $( "#controls" ).draggable();
+    });
+  
   </script>
   
 </head>
 <body>	
-  <div id='controls'>
+    <div id='controls'>
     Planet Fundamental Freq: 
       <input id='planet-fundamental' value=".5" size="7">
       </input> hz<br/>
