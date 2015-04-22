@@ -8,7 +8,7 @@ function Scene (width, height){
   // Basic three.js setup
   this.scene = new THREE.Scene();
     
-  this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 10);
+  this.camera = new THREE.PerspectiveCamera(80, width / height, 0.1, 10);
   this.camera.position.z = 500;
 
   this.renderer = new THREE.WebGLRenderer();
