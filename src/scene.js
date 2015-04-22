@@ -1,4 +1,4 @@
-import Physics from './physics.js';
+import Physics from './ngraph-physics.js';
 window.lion.Physics = Physics;
 import Mars from './objects/Mars.js';
 import Moon from './objects/Moon.js';
@@ -125,8 +125,8 @@ Scene.prototype.setPlanetFrequenciesFromDOM = function () {
 }
 
 Scene.prototype.render = function (milliseconds) {    
-  // this.updateParticlePositionsUsingPhysics(milliseconds);
-  this.updateParticlePositionsNoPhysics(milliseconds);
+  this.updateParticlePositionsPhysics(milliseconds);
+  // this.updateParticlePositionsNoPhysics(milliseconds);
   this.updatePositionsFromParticles();
   
   this.renderer.render(this.scene, this.camera);

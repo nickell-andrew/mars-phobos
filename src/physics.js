@@ -1,12 +1,3 @@
-import Phys from 'ngraph.physics.simulator';
-
-// var physics = require('ngraph.physics.primitives');
-
-
-// or this even has node packages already available: see https://github.com/anvaka/ngraph.physics.simulator 
-// AND https://github.com/anvaka/ngraph.quadtreebh
-
-
 // adapted from https://jsfiddle.net/24mg6ctg/12/
 // this might be a better source for a 3D simulation: https://github.com/stefano-meschiari/WhenGiantsCollide
 

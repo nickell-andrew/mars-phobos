@@ -1,9 +1,9 @@
 import THREE from 'three';
-import Physics from '../physics.js';
+import Physics from '../ngraph-physics.js';
   
 function Mars(){
   THREE.Object3D.call(this);
-  var radius = 0.2;
+  var radius = 0.08;
   var texture = new THREE.ImageUtils.loadTexture('images/textures/marsmap2k.jpg');
   var bumpMap = new THREE.ImageUtils.loadTexture('images/textures/marsbump2k.jpg');
   var geometry = new THREE.SphereGeometry(radius, 100, 100);
