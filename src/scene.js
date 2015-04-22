@@ -28,8 +28,6 @@ function Scene (width, height){
   light1.position.y = this.camera.position.y;
   this.scene.add( light1 );
     
-
-
   // Or create container classes for them to simplify your code
   this.moon = new Moon();
   this.moon.position.set(150, 0, 0);
@@ -128,6 +126,8 @@ Scene.prototype.render = function (milliseconds) {
   this.updateParticlePositionsPhysics(milliseconds);
   // this.updateParticlePositionsNoPhysics(milliseconds);
   this.updatePositionsFromParticles();
+  
+  this.camera.lookAt(this.planet.position);
   
   this.renderer.render(this.scene, this.camera);
   
