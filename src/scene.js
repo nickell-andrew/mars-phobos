@@ -66,6 +66,11 @@ Scene.prototype.resize = function(width, height) {
 }
 
 Scene.prototype.updateParticlePositionsPhysics = function (milliseconds) {
+  var particles = [
+    this.planet.particle, 
+    this.moon.particle
+  ];
+  // TODO: add contents of this.probes 
   Physics.tick([this.planet.particle, this.moon.particle]);
 
 }
@@ -120,6 +125,17 @@ Scene.prototype.setPlanetFrequenciesFromDOM = function () {
     $('#planet-y-harmonic').val()
   );
   
+}
+
+Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
+  /*var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
+  var light1 = new THREE.PointLight( 0xffffff, 7, 500, 2 );
+  light1.add( new THREE.Mesh( Moon , new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
+  light1.position.z = this.camera.position.z/2;
+  light1.position.x = this.camera.position.x;
+  light1.position.y = this.camera.position.y; */
+  var probe = new THREE.SphereGeometry (.02, 8, 8)
+  this.probe.position.set(0, 1, 0)
 }
 
 Scene.prototype.render = function (milliseconds) {    

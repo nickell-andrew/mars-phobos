@@ -1,0 +1,14 @@
+Add a form that let's you pick launch velocity and adds a probe to the scene near the planets surface with that velocity
+I suggest you make probes be an array on Scene
+Suggest you start with Scene.launchProbe(fromSurfaceOf, velocity)
+Add UI after backend is solid
+
+Start on surface
+Surface=radius, yeah
+
+
+Convert Mars and Moon to es6 classes  COMMIT
+Extract shared code from Mars/Moon -> CelestialBody class with inheritance
+in scene constructor add planet and moon to this.bodies array [];
+refactor set*position into CelestialBody class
+remove unnecessary references to planet/moon using this.bodies instead.

@@ -10,8 +10,10 @@ function init(){
   $('.three').append(scene.renderer.domElement);
   window.lion.scene = scene;
   
-  gui = new dat.GUI();
-  gui.close();
+  //gui = new dat.GUI();
+  //gui.close();
+
+  $( "#controls" ).draggable();
 
   $(window).on('resize', resizeHandler);
   $('#update').on('click', function () {
