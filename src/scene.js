@@ -75,7 +75,6 @@ Scene.prototype.resize = function(width, height) {
 Scene.prototype.runPhysicsOnBodies = function (milliseconds) {
   var particles = this.bodies.map( (body) => body.particle );
   // TODO: add contents of this.probes 
-  Physics.tick([this.planet.particle, this.moon.particle]);
   Physics.tick(particles);
 
 }
