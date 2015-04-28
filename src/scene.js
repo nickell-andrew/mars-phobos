@@ -15,10 +15,13 @@ function Scene (width, height){
   this.renderer.setSize(width, height);
   this.renderer.setClearColor(0x000000);
 
+  this.bodies = [];  //Our array of CelestialBodies
+ 
   // Directly add objects
   this.planet = new Mars();
   this.planet.position.set(-150, 0, 0);
   this.scene.add(this.planet);
+  this.bodies.push(this.planet); //adding this.planet to this.bodies
     
   var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
   var light1 = new THREE.PointLight( 0xffffff, 7, 500, 2 );
@@ -32,6 +35,7 @@ function Scene (width, height){
   this.moon = new Moon();
   this.moon.position.set(150, 0, 0);
   this.scene.add(this.moon);
+  this.bodies.push(this.moon); //adding this.moon to this.bodies
     
   this.setPlanetPosition({x:0, y:0, z:0});
   this.setMoonPosition({x:1, y:0, z:0});
@@ -46,12 +50,15 @@ Scene.prototype.youClickedMe = function () {
   console.log('You clicked me');
 }
 
-
-Scene.prototype.setMoonPosition = function(pos) {
+Scene.prototype.setBodyPostion = function(pos, body) { 
+  body.position.set(pos.x, pos.y, pos.z);
+  body.particle.setPosition(pos);
+}
+Scene.prototype.setMoonPosition = function(pos) { //DEPRECATED
   this.moon.position.set(pos.x, pos.y, pos.z);
   this.moon.particle.setPosition(pos);
 } 
-Scene.prototype.setPlanetPosition = function(pos) {
+Scene.prototype.setPlanetPosition = function(pos) { //DEPRECATED
   this.planet.position.set(pos.x, pos.y, pos.z);
   this.planet.particle.setPosition(pos);
 } 
@@ -65,13 +72,11 @@ Scene.prototype.resize = function(width, height) {
   this.renderer.setSize(width, height);
 }
 
-Scene.prototype.updateParticlePositionsPhysics = function (milliseconds) {
-  var particles = [
-    this.planet.particle, 
-    this.moon.particle
-  ];
+Scene.prototype.runPhysicsOnBodies = function (milliseconds) {
+  var particles = this.bodies.map( (body) => body.particle );
   // TODO: add contents of this.probes 
   Physics.tick([this.planet.particle, this.moon.particle]);
+  Physics.tick(particles);
 
 }
 
@@ -139,7 +144,7 @@ Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
 }
 
 Scene.prototype.render = function (milliseconds) {    
-  this.updateParticlePositionsPhysics(milliseconds);
+  this.runPhysicsOnBodies(milliseconds);
   // this.updateParticlePositionsNoPhysics(milliseconds);
   this.updatePositionsFromParticles();
   
