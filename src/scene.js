@@ -50,7 +50,7 @@ Scene.prototype.youClickedMe = function () {
   console.log('You clicked me');
 }
 
-Scene.prototype.setBodyPostion = function(pos, body) { 
+Scene.prototype.setBodyPosition = function(pos, body) { 
   body.position.set(pos.x, pos.y, pos.z);
   body.particle.setPosition(pos);
 }
@@ -80,8 +80,14 @@ Scene.prototype.runPhysicsOnBodies = function (milliseconds) {
 }
 
 Scene.prototype.updatePositionsFromParticles = function () {
-  this.setMoonPosition( this.moon.particle.getPosition() );
-  this.setPlanetPosition( this.planet.particle.getPosition() );
+  this.bodies.map( (body) => {
+    this.setBodyPosition(
+      body.particle.getPosition(),
+      body
+    ); 
+  });
+  //this.setMoonPosition( this.moon.particle.getPosition() );
+  //this.setPlanetPosition( this.planet.particle.getPosition() );
 }
 
 Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
