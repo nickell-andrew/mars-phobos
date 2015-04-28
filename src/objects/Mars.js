@@ -9,7 +9,6 @@ class Mars extends CelestialBody {
     var radius = 0.08;
     var texture = new THREE.ImageUtils.loadTexture('images/textures/marsmap2k.jpg');
     var bumpMap = new THREE.ImageUtils.loadTexture('images/textures/marsbump2k.jpg');
-    var geometry = new THREE.SphereGeometry(radius, 100, 100);
     var material = new THREE.MeshPhongMaterial({
       color: 0x552222, 
       map: texture,
