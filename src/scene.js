@@ -86,8 +86,6 @@ Scene.prototype.updatePositionsFromParticles = function () {
       body
     ); 
   });
-  //this.setMoonPosition( this.moon.particle.getPosition() );
-  //this.setPlanetPosition( this.planet.particle.getPosition() );
 }
 
 Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
