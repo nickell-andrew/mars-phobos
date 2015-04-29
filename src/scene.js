@@ -1,8 +1,12 @@
 import Physics from './ngraph-physics.js';
 window.lion.Physics = Physics;
-import Mars from './objects/Mars.js';
-import Moon from './objects/Moon.js';
+
 import THREE from 'three';
+
+import Mars from './objects/Mars';
+import Moon from './objects/Moon';
+import Probe from './objects/Probe';
+
 
 function Scene (width, height){
   // Basic three.js setup
@@ -16,7 +20,8 @@ function Scene (width, height){
   this.renderer.setClearColor(0x000000);
 
   this.bodies = [];  //Our array of CelestialBodies
- 
+  this.probes = []; //Our array of Probes
+  
   // Directly add objects
   this.planet = new Mars();
   this.planet.position.set(-150, 0, 0);
@@ -80,12 +85,7 @@ Scene.prototype.runPhysicsOnBodies = function (milliseconds) {
 }
 
 Scene.prototype.updatePositionsFromParticles = function () {
-  this.bodies.map( (body) => {
-    this.setBodyPosition(
-      body.particle.getPosition(),
-      body
-    ); 
-  });
+  this.bodies.forEach( (body) => body.updatePositionFromParticle() );
 }
 
 Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
@@ -142,8 +142,10 @@ Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
   light1.position.z = this.camera.position.z/2;
   light1.position.x = this.camera.position.x;
   light1.position.y = this.camera.position.y; */
-  var probe = new THREE.SphereGeometry (.02, 8, 8)
-  this.probe.position.set(0, 1, 0)
+  var probe = new Probe();
+  probe.position.set(0, 1, 0);
+  this.bodies.push(probe);
+  return probe;
 }
 
 Scene.prototype.render = function (milliseconds) {    
