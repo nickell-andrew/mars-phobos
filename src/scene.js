@@ -25,6 +25,7 @@ function Scene (width, height){
   // Directly add objects
   this.planet = new Mars();
   this.planet.setPosition({x:0, y:0, z:0});
+  this.planet.pinnedInPlace = true; // we don't want mars moving on us...
   this.scene.add(this.planet);
   this.bodies.push(this.planet); //adding this.planet to this.bodies
     
@@ -63,7 +64,9 @@ Scene.prototype.runPhysicsOnBodies = function (milliseconds) {
 }
 
 Scene.prototype.updatePositionsFromParticles = function () {
-  this.bodies.forEach( (body) => body.updatePositionFromParticle() );
+  this.bodies.forEach(
+    (body) => body.updatePositionFromParticle() 
+  );
 }
 
 Scene.prototype.setPlanetFrequenciesFromDOM = function () {
@@ -97,18 +100,18 @@ Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
 Scene.prototype.render = function (milliseconds) {    
   this.runPhysicsOnBodies(milliseconds);
   
-  this.updatePositionsFromParticles();
+  // Reset the particle positions of pinned bodies so they no move
+  this.bodies
+    .filter( b => b.pinnedInPlace )
+    .forEach( b => b.updateParticleFromPosition() );
   
-  this.camera.lookAt(this.planet.position);
+  this.updatePositionsFromParticles();
   
   this.renderer.render(this.scene, this.camera);
   
-  this.planet.rotation.y += 0.01;
-  this.planet.rotation.x += 0.01;
-
-  this.moon.update();
-  
-  
+  this.bodies.forEach(
+    b => b.update()
+  )
 }
 
 

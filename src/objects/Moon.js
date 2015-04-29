@@ -19,7 +19,7 @@ class Moon extends CelestialBody {
     this.particle.body.velocity.y = 1.0;
   }
   update() {
-    this.mesh.rotation.y += .0003 ;
+    this.rotation.y += .0003 ;
   }
 }
 

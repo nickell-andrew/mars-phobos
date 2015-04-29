@@ -9,6 +9,7 @@ class CelestialBody extends THREE.Object3D {
     this.mesh = new THREE.Mesh(geometry, material);
     this.add(this.mesh);
     this.particle = Physics.createParticle({x:0,y:0,z:0}, radius);
+    this.pinnedInPlace = false;
   }
 
   update() {
@@ -32,6 +33,11 @@ class CelestialBody extends THREE.Object3D {
   }
   updatePositionFromParticle() {
     this.setPosition( this.particle.getPosition() );
+  }
+  updateParticleFromPosition() {
+    this.particle.setPosition(
+      this.getPosition()
+    );
   }
 }
 

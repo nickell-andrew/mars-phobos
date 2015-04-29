@@ -14,11 +14,13 @@ class Mars extends CelestialBody {
       bumpScale: .02,
       shininess: .000000001
     });
+    
     super(radius, material);
   }
 
   update() {
-    this.mesh.rotation.y = 0.00;
+    this.rotation.y += 0.01;
+    this.rotation.x += 0.01;
   }
 }
 
