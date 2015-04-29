@@ -21,7 +21,6 @@ function Scene (width, height){
   this.renderer.setClearColor(0x000000);
 
   this.bodies = [];  //Our array of CelestialBodies
-  this.probes = []; //Our array of Probes
   
   // Directly add objects
   this.planet = new Mars();

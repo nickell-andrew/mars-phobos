@@ -11,10 +11,6 @@ class CelestialBody extends THREE.Object3D {
     this.particle = Physics.createParticle({x:0,y:0,z:0}, radius);
   }
 
-
-/*Mars.prototype = new THREE.Object3D;
-Mars.prototype.constructor = Mars; */
-
   update() {
     this.mesh.rotation.y += 0.01;
   }
