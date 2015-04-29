@@ -3,8 +3,8 @@ import Physics from '../ngraph-physics.js';
   
 class CelestialBody extends THREE.Object3D {
   constructor(radius, material) {
-    //THREE.Object3D.call(this);
     super();
+    this.radius = radius;
     var geometry = new THREE.SphereGeometry(radius, 100, 100);
     this.mesh = new THREE.Mesh(geometry, material);
     this.add(this.mesh);
@@ -21,6 +21,18 @@ Mars.prototype.constructor = Mars; */
   setPosition(pos) {
     this.position.set(pos.x, pos.y, pos.z);
     this.particle.setPosition(pos);
+  }
+  getPosition() {
+    return {
+      x: this.position.x, 
+      y: this.position.y, 
+      z: this.position.z
+    };
+  }
+  setVelocity(x, y, z) {
+    this.particle.body.velocity.x = x;
+    this.particle.body.velocity.y = y;
+    this.particle.body.velocity.z = z;
   }
   updatePositionFromParticle() {
     this.setPosition( this.particle.getPosition() );

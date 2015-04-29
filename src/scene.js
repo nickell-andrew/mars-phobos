@@ -83,9 +83,15 @@ Scene.prototype.setPlanetFrequenciesFromDOM = function () {
 }
 
 Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
+  var launchPos = fromSurfaceOf.getPosition();
+  launchPos.y += fromSurfaceOf.radius;
+  
   var probe = new Probe();
-  probe.position.set(0, 1, 0);
+  probe.setPosition(launchPos);
   this.bodies.push(probe);
+
+  probe.setVelocity(0, velocity, 0);
+
   return probe;
 }
 
