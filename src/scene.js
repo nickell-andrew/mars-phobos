@@ -13,7 +13,8 @@ function Scene (width, height){
   this.scene = new THREE.Scene();
     
   this.camera = new THREE.PerspectiveCamera(80, width / height, 0.1, 10);
-  this.camera.position.z = 500;
+  this.setCameraPosition({x:0, y:0, z:2});    
+
 
   this.renderer = new THREE.WebGLRenderer();
   this.renderer.setSize(width, height);
@@ -24,49 +25,28 @@ function Scene (width, height){
   
   // Directly add objects
   this.planet = new Mars();
-  this.planet.position.set(-150, 0, 0);
+  this.planet.setPosition({x:0, y:0, z:0});
   this.scene.add(this.planet);
   this.bodies.push(this.planet); //adding this.planet to this.bodies
     
   var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
-  var light1 = new THREE.PointLight( 0xffffff, 7, 500, 2 );
+  var light1 = new THREE.PointLight( 0xffffff, 7, 8, 2 );
   light1.add( new THREE.Mesh( Moon , new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
-  light1.position.z = this.camera.position.z/2;
+  light1.position.z = this.camera.position.z;
   light1.position.x = this.camera.position.x;
   light1.position.y = this.camera.position.y;
   this.scene.add( light1 );
     
   // Or create container classes for them to simplify your code
   this.moon = new Moon();
-  this.moon.position.set(150, 0, 0);
+  this.moon.setPosition({x:1, y:0, z:0});
   this.scene.add(this.moon);
   this.bodies.push(this.moon); //adding this.moon to this.bodies
-    
-  this.setPlanetPosition({x:0, y:0, z:0});
-  this.setMoonPosition({x:1, y:0, z:0});
-  this.setCameraPosition({x:0, y:0, z:2});    
-  
+      
   this.setPlanetFrequenciesFromDOM();  
   console.log('Scene runnning...');
 }
-
-// New Methods
-Scene.prototype.youClickedMe = function () {
-  console.log('You clicked me');
-}
-
-Scene.prototype.setBodyPosition = function(pos, body) { 
-  body.position.set(pos.x, pos.y, pos.z);
-  body.particle.setPosition(pos);
-}
-Scene.prototype.setMoonPosition = function(pos) { //DEPRECATED
-  this.moon.position.set(pos.x, pos.y, pos.z);
-  this.moon.particle.setPosition(pos);
-} 
-Scene.prototype.setPlanetPosition = function(pos) { //DEPRECATED
-  this.planet.position.set(pos.x, pos.y, pos.z);
-  this.planet.particle.setPosition(pos);
-} 
+ 
 Scene.prototype.setCameraPosition = function(pos) {
   this.camera.position.set(pos.x, pos.y, pos.z);
 }
@@ -77,47 +57,14 @@ Scene.prototype.resize = function(width, height) {
   this.renderer.setSize(width, height);
 }
 
-Scene.prototype.runPhysicsOnBodies = function (milliseconds) {
-  var particles = this.bodies.map( (body) => body.particle );
-  // TODO: add contents of this.probes 
-  Physics.tick(particles);
-
+Scene.prototype.runPhysicsOnBodies = function (milliseconds) { 
+  Physics.tick( this.bodies.map( 
+    (body) => body.particle 
+  ));
 }
 
 Scene.prototype.updatePositionsFromParticles = function () {
   this.bodies.forEach( (body) => body.updatePositionFromParticle() );
-}
-
-Scene.prototype.updateParticlePositionsNoPhysics = function (milliseconds) {
-  
-  var percentThroughCurrentCycle = function(milliseconds, periodLengthMS) {
-    return (milliseconds % periodLengthMS)  / periodLengthMS;
-  }
-  var periodRadians = 2 * Math.PI;
-  
-  var moonX = Math.cos(
-    percentThroughCurrentCycle(milliseconds, 5000) * periodRadians
-  );
-  var moonY = 0.5 * Math.sin(
-    percentThroughCurrentCycle(milliseconds, 5000) * periodRadians
-  );
-  var moonPos = {x:moonX , y: moonY, z: 0 };
-  this.moon.particle.setPosition(moonPos);
-    
-  var periodPlanetX = (1/ (this.planet.fundamentalFrequency
-    * this.planet.xHarmonic)) * 1000;
-  var planetX = 0.5 * Math.sin(
-    percentThroughCurrentCycle(milliseconds, periodPlanetX) * periodRadians
-  );
-  
-  var periodPlanetY = (1/ (this.planet.fundamentalFrequency
-    * this.planet.yHarmonic)) * 1000;
-  var planetY = 0.25 * Math.sin(
-    percentThroughCurrentCycle(milliseconds, periodPlanetY) * periodRadians
-  ); 
-  
-  var planetPos = {x: planetX , y: planetY, z: 0};
-  this.planet.particle.setPosition(planetPos);
 }
 
 Scene.prototype.setPlanetFrequenciesFromDOM = function () {
@@ -136,12 +83,6 @@ Scene.prototype.setPlanetFrequenciesFromDOM = function () {
 }
 
 Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
-  /*var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
-  var light1 = new THREE.PointLight( 0xffffff, 7, 500, 2 );
-  light1.add( new THREE.Mesh( Moon , new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
-  light1.position.z = this.camera.position.z/2;
-  light1.position.x = this.camera.position.x;
-  light1.position.y = this.camera.position.y; */
   var probe = new Probe();
   probe.position.set(0, 1, 0);
   this.bodies.push(probe);
@@ -150,7 +91,7 @@ Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
 
 Scene.prototype.render = function (milliseconds) {    
   this.runPhysicsOnBodies(milliseconds);
-  // this.updateParticlePositionsNoPhysics(milliseconds);
+  
   this.updatePositionsFromParticles();
   
   this.camera.lookAt(this.planet.position);
