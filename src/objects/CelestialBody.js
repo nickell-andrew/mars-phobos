@@ -18,6 +18,13 @@ Mars.prototype.constructor = Mars; */
   update() {
     this.mesh.rotation.y += 0.01;
   }
+  setPosition(pos) {
+    this.position.set(pos.x, pos.y, pos.z);
+    this.particle.setPosition(pos);
+  }
+  updatePositionFromParticle() {
+    this.setPosition( this.particle.getPosition() );
+  }
 }
 
 export default CelestialBody;
