@@ -4,8 +4,6 @@ import CelestialBody from './CelestialBody'
   
 class Mars extends CelestialBody {
   constructor() {
-    //THREE.Object3D.call(this);
-    
     var radius = 0.08;
     var texture = new THREE.ImageUtils.loadTexture('images/textures/marsmap2k.jpg');
     var bumpMap = new THREE.ImageUtils.loadTexture('images/textures/marsbump2k.jpg');
@@ -18,10 +16,6 @@ class Mars extends CelestialBody {
     });
     super(radius, material);
   }
-
-
-/*Mars.prototype = new THREE.Object3D;
-Mars.prototype.constructor = Mars; */
 
   update() {
     this.mesh.rotation.y = 0.00;

@@ -11,10 +11,8 @@ class Probe extends CelestialBody {
       shininess: .000000000001
     });
     super(radius, material);
-    this.particle.body.velocity.y = 1.0;
   }
   update() {
-    this.mesh.rotation.y += .0003 ;
   }
 }
 
