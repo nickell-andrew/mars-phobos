@@ -9,6 +9,7 @@ function init(){
   scene = new Scene(window.innerWidth, window.innerHeight);
   $('.three').append(scene.renderer.domElement);
   window.lion.scene = scene;
+  window.lion.launch = function (v) { lion.scene.launchProbe(lion.scene.planet, v) }
   
   //gui = new dat.GUI();
   //gui.close();
