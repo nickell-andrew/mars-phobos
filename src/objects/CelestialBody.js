@@ -26,6 +26,16 @@ class CelestialBody extends THREE.Object3D {
       z: this.position.z
     };
   }
+  distanceToCenterOf(other) {
+    return Math.sqrt(
+      Math.pow(this.position.x - other.position.x, 2) 
+      + Math.pow(this.position.y - other.position.y, 2)
+      + Math.pow(this.position.z - other.position.z, 2)
+    );
+  }
+  distanceToSurfaceOf(other) {
+    return this.distanceToCenterOf(other) - this.radius - other.radius;
+  }
   setVelocity(x, y, z) {
     this.particle.body.velocity.x = x;
     this.particle.body.velocity.y = y;

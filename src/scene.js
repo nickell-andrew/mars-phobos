@@ -99,6 +99,18 @@ Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
   return probe;
 }
 
+Scene.prototype.detectParticleCollisions = function (resolveCollisionCB) {
+  for (var i = 0; i < this.bodies.length; i++) {
+    var p1 = this.bodies[i];
+    for (var j = i+1; j < this.bodies.length; j++) {
+      var p2 = this.bodies[j];
+      if (p1.distanceToSurfaceOf(p2) <= 0) {
+        resolveCollisionCB(p1, p2);
+      }
+    }
+  }
+}
+
 Scene.prototype.render = function (milliseconds) {    
   this.runPhysicsOnBodies(milliseconds);
   
@@ -109,6 +121,10 @@ Scene.prototype.render = function (milliseconds) {
   
   this.updatePositionsFromParticles();
   
+  this.detectParticleCollisions(function (p1, p2) {
+    console.log(p1,  " ran into ", p2);
+  });   
+   
   this.renderer.render(this.scene, this.camera);
   
   this.bodies.forEach(
