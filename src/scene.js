@@ -1,5 +1,5 @@
 import Physics from './ngraph-physics.js';
-window.lion.Physics = Physics;
+window.dbg.Physics = Physics;
 
 import THREE from 'three';
 
@@ -105,10 +105,20 @@ Scene.prototype.detectParticleCollisions = function (resolveCollisionCB) {
     for (var j = i+1; j < this.bodies.length; j++) {
       var p2 = this.bodies[j];
       if (p1.distanceToSurfaceOf(p2) <= 0) {
-        resolveCollisionCB(p1, p2);
+        
+        var larger = p1.radius > p2.radius ? p1 : p2;
+        var smaller = p1 === larger ? p2 : p1;
+        
+        resolveCollisionCB(larger, smaller);
       }
     }
   }
+}
+
+Scene.prototype.deleteBody = function (body) {
+  this.scene.remove(body);
+  //remove particle
+  //remove reference in this.bodies
 }
 
 Scene.prototype.render = function (milliseconds) {    
@@ -121,8 +131,8 @@ Scene.prototype.render = function (milliseconds) {
   
   this.updatePositionsFromParticles();
   
-  this.detectParticleCollisions(function (p1, p2) {
-    console.log(p1,  " ran into ", p2);
+  this.detectParticleCollisions(function (larger, smaller) {
+    alert("Game Over!");
   });   
    
   this.renderer.render(this.scene, this.camera);

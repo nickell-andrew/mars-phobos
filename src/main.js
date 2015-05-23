@@ -8,13 +8,13 @@ $(document).ready(init);
 function init(){
   scene = new Scene(window.innerWidth, window.innerHeight);
   $('.three').append(scene.renderer.domElement);
-  window.lion.scene = scene;
-  window.lion.launch = function (v) { lion.scene.launchProbe(lion.scene.planet, v) }
+  window.dbg.scene = scene;
+  window.dbg.launch = function (v) { scene.launchProbe(scene.planet, v) };
   
   //gui = new dat.GUI();
   //gui.close();
 
-  $( "#controls" ).draggable();
+  $( "#controls" ).draggable().hide();
 
   $(window).on('resize', resizeHandler);
   $('#update').on('click', function () {
