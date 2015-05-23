@@ -92,7 +92,7 @@ Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
   probe.setPosition(launchPos);
   this.bodies.push(probe);
 
-  probe.setVelocity(-velocity, 0, 0);
+  probe.setVelocity(-velocity, 0, 0); //FIX ME I only set velocity not the                                        //particle velocity
 
   this.scene.add(probe);
 
@@ -116,9 +116,11 @@ Scene.prototype.detectParticleCollisions = function (resolveCollisionCB) {
 }
 
 Scene.prototype.deleteBody = function (body) {
-  this.scene.remove(body);
-  //remove particle
-  //remove reference in this.bodies
+  var bodyIndex = this.bodies.indexOf(body);
+  if (bodyIndex >= 0) {
+    this.scene.remove(body);
+    this.bodies = this.bodies.splice(bodyIndex-1, 1);
+  }
 }
 
 Scene.prototype.render = function (milliseconds) {    
@@ -132,8 +134,9 @@ Scene.prototype.render = function (milliseconds) {
   this.updatePositionsFromParticles();
   
   this.detectParticleCollisions(function (larger, smaller) {
+    this.deleteBody(smaller);
     alert("Game Over!");
-  });   
+  }.bind(this));   
    
   this.renderer.render(this.scene, this.camera);
   
