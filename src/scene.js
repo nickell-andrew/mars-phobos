@@ -119,7 +119,7 @@ Scene.prototype.deleteBody = function (body) {
   var bodyIndex = this.bodies.indexOf(body);
   if (bodyIndex >= 0) {
     this.scene.remove(body);
-    this.bodies = this.bodies.splice(bodyIndex-1, 1);
+    this.bodies.splice(bodyIndex, 1);
   }
 }
 
