@@ -85,15 +85,17 @@ Scene.prototype.setPlanetFrequenciesFromDOM = function () {
 }
 
 Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
+  console.log("Probe Away! ...moving at ", velocity);
+  
   var launchPos = fromSurfaceOf.getPosition();
-  launchPos.y += fromSurfaceOf.radius * 8;
+  launchPos.y += fromSurfaceOf.radius * 8; //FIXME I should be sane distance
   
   var probe = new Probe();
   probe.setPosition(launchPos);
   this.bodies.push(probe);
 
-  probe.setVelocity(-velocity, 0, 0); //FIX ME I only set velocity not the                                        //particle velocity
-
+  probe.setVelocity(-velocity, 0, 0);
+  
   this.scene.add(probe);
 
   return probe;

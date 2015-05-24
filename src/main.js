@@ -1,7 +1,9 @@
 import Scene from './scene.js';
 import THREE from 'three';
 
+var V_PER_MS_SPACE_IS_PRESSED = 0.1;
 var scene, gui;
+
 
 $(document).ready(init);
 
@@ -15,11 +17,22 @@ function init(){
   //gui.close();
 
   $( "#controls" ).draggable().hide();
-
   $(window).on('resize', resizeHandler);
-  $('#update').on('click', function () {
-    scene.setPlanetFrequenciesFromDOM();
+  
+  var whenSpacebarPressed = null;
+  $(window).keydown(function (e) {
+    if (e.keyCode == 32 && whenSpacebarPressed === null) {
+      whenSpacebarPressed = Date.now();
+    }
+  }).keyup(function (e) {
+    if (e.keyCode == 32 && whenSpacebarPressed != null) {
+      var timeElapsed = Date.now() - whenSpacebarPressed;
+      whenSpacebarPressed = null;
+      var launchVelocity = V_PER_MS_SPACE_IS_PRESSED * timeElapsed;
+      scene.launchProbe(scene.planet, launchVelocity);
+    }
   });
+  
   animate();  
 }
 
