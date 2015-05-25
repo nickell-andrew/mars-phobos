@@ -1,7 +1,8 @@
 import Scene from './scene.js';
 import THREE from 'three';
 
-var V_PER_MS_SPACE_IS_PRESSED = 0.00001;
+var E_PER_MS_SPACE_IS_PRESSED = 3e-7;
+var MIN_E = 0.001;
 var scene, gui;
 
 
@@ -11,7 +12,7 @@ function init(){
   scene = new Scene(window.innerWidth, window.innerHeight);
   $('.three').append(scene.renderer.domElement);
   window.dbg.scene = scene;
-  window.dbg.launch = function (v) { scene.launchProbe(scene.planet, v) };
+  window.dbg.launch = function (e) { scene.launchProbe(scene.planet, e) };
   
   //gui = new dat.GUI();
   //gui.close();
@@ -28,8 +29,8 @@ function init(){
     if (e.keyCode == 32 && whenSpacebarPressed != null) {
       var timeElapsed = Date.now() - whenSpacebarPressed;
       whenSpacebarPressed = null;
-      var launchVelocity = V_PER_MS_SPACE_IS_PRESSED * timeElapsed;
-      scene.launchProbe(scene.planet, launchVelocity);
+      var launchEnergy = E_PER_MS_SPACE_IS_PRESSED * timeElapsed + MIN_E;
+      scene.launchProbe(scene.planet, launchEnergy);
     }
   });
   

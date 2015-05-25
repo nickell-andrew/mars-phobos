@@ -84,8 +84,9 @@ Scene.prototype.setPlanetFrequenciesFromDOM = function () {
   
 }
 
-Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
-  console.log("Probe Away! ...moving at ", velocity);
+Scene.prototype.launchProbe = function (fromSurfaceOf, energy) {
+  console.log("launchProbe(", energy, ")");
+  var velocity = Math.sqrt(energy);
   
   var launchPos = fromSurfaceOf.getPosition();
   launchPos.y += fromSurfaceOf.radius * 2; //FIXME I should be sane distance
@@ -95,7 +96,9 @@ Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
   this.bodies.push(probe);
   this.lastProbe = probe;
 
-  probe.setVelocity(-velocity, velocity, 0);
+  var xVelocity = -velocity / Math.sqrt(2);
+  var yVelocity = velocity / Math.sqrt(2);
+  probe.setVelocity(xVelocity, yVelocity, 0);
   
   this.scene.add(probe);
 
