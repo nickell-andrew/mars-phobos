@@ -9,7 +9,7 @@ import physics from 'ngraph.physics.primitives';
 
 var sim = createSimulator({
   gravity: 1.0,
-  timeStep: .15,
+  timeStep: .25,
   dragCoeff: 0.0,
   createBody: function(pos) {
     return new physics.Body3d(pos);
@@ -251,7 +251,7 @@ Particle.prototype.setPosition = function (pos) {
   this.body.pos.z = pos.z;
 }
 
-var PLANET_DENSITY = 1.0;
+var PLANET_DENSITY = 0.1;
 
 export default {
   createParticle: function (pos, radius) {
