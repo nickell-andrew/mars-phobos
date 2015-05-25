@@ -88,13 +88,14 @@ Scene.prototype.launchProbe = function (fromSurfaceOf, velocity) {
   console.log("Probe Away! ...moving at ", velocity);
   
   var launchPos = fromSurfaceOf.getPosition();
-  launchPos.y += fromSurfaceOf.radius * 8; //FIXME I should be sane distance
+  launchPos.y += fromSurfaceOf.radius * 2; //FIXME I should be sane distance
   
   var probe = new Probe();
   probe.setPosition(launchPos);
   this.bodies.push(probe);
+  this.lastProbe = probe;
 
-  probe.setVelocity(-velocity, 0, 0);
+  probe.setVelocity(-velocity, velocity, 0);
   
   this.scene.add(probe);
 
@@ -122,17 +123,21 @@ Scene.prototype.deleteBody = function (body) {
   if (bodyIndex >= 0) {
     this.scene.remove(body);
     this.bodies.splice(bodyIndex, 1);
+    if (body === this.lastProbe) {
+      this.lastProbe = null;
+    }
   }
+  
 }
 
-Scene.prototype.render = function (milliseconds) {    
+Scene.prototype.render = function (milliseconds) {
   this.runPhysicsOnBodies(milliseconds);
   
-  // Reset the particle positions of pinned bodies so they no move
+  //Reset the particle positions of pinned bodies so they no move
   this.bodies
     .filter( b => b.pinnedInPlace )
     .forEach( b => b.updateParticleFromPosition() );
-  
+    
   this.updatePositionsFromParticles();
   
   this.detectParticleCollisions(function (larger, smaller) {

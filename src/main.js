@@ -1,7 +1,7 @@
 import Scene from './scene.js';
 import THREE from 'three';
 
-var V_PER_MS_SPACE_IS_PRESSED = 0.1;
+var V_PER_MS_SPACE_IS_PRESSED = 0.00005;
 var scene, gui;
 
 

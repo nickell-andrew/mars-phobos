@@ -16,7 +16,7 @@ class Moon extends CelestialBody {
       shininess: .000000000001
     });
     super(radius, material);
-    this.particle.body.velocity.y = 1.0;
+    this.particle.body.velocity.y = 0.05;
   }
   update() {
     this.rotation.y += .0003 ;

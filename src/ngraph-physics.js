@@ -2,14 +2,14 @@
 
 import createSimulator from 'ngraph.physics.simulator';
 import quadtree from 'ngraph.quadtreebh3d';
-import random from 'ngraph.random';
+import ngraphrandom from 'ngraph.random';
 import merge from 'ngraph.merge';
 import expose from 'ngraph.expose';
 import physics from 'ngraph.physics.primitives';
 
 var sim = createSimulator({
   gravity: 1.0,
-  timeStep: .01,
+  timeStep: .15,
   dragCoeff: 0.0,
   createBody: function(pos) {
     return new physics.Body3d(pos);
@@ -54,6 +54,7 @@ var sim = createSimulator({
     return (tx * tx + ty * ty + tz * tz)/bodies.length;
   },
   createSpringForce: function (options) {
+    var random = ngraphrandom;
     options = merge(options, {
       springCoeff: 0.0002,
       springLength: 80
@@ -114,7 +115,7 @@ var sim = createSimulator({
     return api;
   },
   createBounds: function (bodies, settings) {
-    var random = random.random(42);
+    var random = ngraphrandom.random(42);
     var boundingBox =  { x1: 0, y1: 0, z1: 0, x2: 0, y2: 0, z2: 0 };
 
     return {
@@ -250,7 +251,7 @@ Particle.prototype.setPosition = function (pos) {
   this.body.pos.z = pos.z;
 }
 
-var PLANET_DENSITY = 400.0;
+var PLANET_DENSITY = 1.0;
 
 export default {
   createParticle: function (pos, radius) {
