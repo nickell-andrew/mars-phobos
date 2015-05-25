@@ -7,7 +7,13 @@
     "url": "https://github.com/nickell-andrew/mars-phobos.git"
   },
   "main": "src/js/main.js",
-  "dependencies": {},
+  "dependencies": {
+    "ngraph.expose": "0.0.0",
+    "ngraph.merge": "0.0.1",
+    "ngraph.physics.primitives": "0.0.7",
+    "ngraph.quadtreebh3d": "0.0.3",
+    "ngraph.random": "0.0.1"
+  },
   "devDependencies": {
     "babel-loader": "^5.0.0",
     "bower-webpack-plugin": "^0.1.8",
