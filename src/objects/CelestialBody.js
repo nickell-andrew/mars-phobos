@@ -5,10 +5,11 @@ class CelestialBody extends THREE.Object3D {
   constructor(radius, material) {
     super();
     this.radius = radius;
+    this.density = 0.1;
     var geometry = new THREE.SphereGeometry(radius, 100, 100);
     this.mesh = new THREE.Mesh(geometry, material);
     this.add(this.mesh);
-    this.particle = Physics.createParticle({x:0,y:0,z:0}, radius);
+    this.particle = Physics.createParticle({x:0,y:0,z:0}, this.radius, this.density);
     this.pinnedInPlace = false;
   }
 

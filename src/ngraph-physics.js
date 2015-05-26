@@ -254,9 +254,9 @@ Particle.prototype.setPosition = function (pos) {
 var PLANET_DENSITY = 0.1;
 
 export default {
-  createParticle: function (pos, radius) {
+  createParticle: function (pos, radius, density) {
     var volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
-    var mass = volume * PLANET_DENSITY;
+    var mass = volume * density;
     console.log(mass);
     return new Particle(pos, mass, sim);
   },

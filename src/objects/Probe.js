@@ -18,6 +18,7 @@ class Probe extends CelestialBody {
     });
     
     super(radius, material);
+    this.density = .000000001;
   }
   update() {
   }
