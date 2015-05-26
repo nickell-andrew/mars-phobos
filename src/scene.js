@@ -19,15 +19,6 @@ function Scene (width, height){
   this.renderer = new THREE.WebGLRenderer();
   this.renderer.setSize(width, height);
   this.renderer.setClearColor(0x000000);
-
-  this.bodies = [];  //Our array of CelestialBodies
-  
-  // Directly add objects
-  this.planet = new Mars();
-  this.planet.setPosition({x:0, y:0, z:0});
-  this.planet.pinnedInPlace = true; // we don't want mars moving on us...
-  this.scene.add(this.planet);
-  this.bodies.push(this.planet); //adding this.planet to this.bodies
     
   var sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
   var light1 = new THREE.PointLight( 0xffffff, 7, 8, 2 );
@@ -36,14 +27,22 @@ function Scene (width, height){
   light1.position.x = this.camera.position.x;
   light1.position.y = this.camera.position.y;
   this.scene.add( light1 );
+  
+  this.bodies = [];  //Our array of CelestialBodies
+  
+  // adding this.planet
+  this.planet = new Mars();
+  this.planet.setPosition({x:0, y:0, z:0});
+  this.planet.pinnedInPlace = true; // we don't want mars moving on us...
+  this.scene.add(this.planet);
+  this.bodies.push(this.planet); //adding this.planet to this.bodies
     
-  // Or create container classes for them to simplify your code
+  //adding this.moon
   this.moon = new Moon();
   this.moon.setPosition({x:1, y:0, z:0});
   this.scene.add(this.moon);
   this.bodies.push(this.moon); //adding this.moon to this.bodies
-      
-  this.setPlanetFrequenciesFromDOM();  
+        
   console.log('Scene runnning...');
 }
  
@@ -67,21 +66,6 @@ Scene.prototype.updatePositionsFromParticles = function () {
   this.bodies.forEach(
     (body) => body.updatePositionFromParticle() 
   );
-}
-
-Scene.prototype.setPlanetFrequenciesFromDOM = function () {
-  this.planet.fundamentalFrequency = Number(
-    $('#planet-fundamental').val()
-  );
-    
-  this.planet.xHarmonic = Number(
-    $('#planet-x-harmonic').val()
-  );
-    
-  this.planet.yHarmonic = Number(
-    $('#planet-y-harmonic').val()
-  );
-  
 }
 
 Scene.prototype.launchProbe = function (fromSurfaceOf, energy) {
@@ -145,7 +129,7 @@ Scene.prototype.render = function (milliseconds) {
   
   this.detectParticleCollisions(function (larger, smaller) {
     this.deleteBody(smaller);
-    alert("Game Over!");
+    alert("Game Over!"); //FIXME an alert is a BAD way to do this.
   }.bind(this));   
    
   this.renderer.render(this.scene, this.camera);

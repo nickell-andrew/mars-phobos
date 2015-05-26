@@ -14,11 +14,7 @@ function init(){
   $('.three').append(scene.renderer.domElement);
   window.dbg.scene = scene;
   window.dbg.launch = function (e) { scene.launchProbe(scene.planet, e) };
-  
-  //gui = new dat.GUI();
-  //gui.close();
 
-  $( "#controls" ).draggable().hide();
   $(window).on('resize', resizeHandler);
   
   var whenSpacebarPressed = null;
