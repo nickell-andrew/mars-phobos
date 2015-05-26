@@ -2,9 +2,10 @@ import Scene from './scene.js';
 import THREE from 'three';
 
 var E_PER_MS_SPACE_IS_PRESSED = 3e-7;
-var MIN_E = 0.001;
+var MIN_E = 0.00125;
 var scene, gui;
-
+//Play rocket roar/explosion sound right before calling launchprobe
+// function randomColor () {return Math.floor(Math.random()*16777215).toString(16)} 
 
 $(document).ready(init);
 
@@ -22,8 +23,11 @@ function init(){
   
   var whenSpacebarPressed = null;
   $(window).keydown(function (e) {
-    if (e.keyCode == 32 && whenSpacebarPressed === null) {
-      whenSpacebarPressed = Date.now();
+    if (e.keyCode == 32) { 
+      if (whenSpacebarPressed === null) {
+        whenSpacebarPressed = Date.now();
+      }
+      $('#launchbar').css('height', "+=10%");
     }
   }).keyup(function (e) {
     if (e.keyCode == 32 && whenSpacebarPressed != null) {
@@ -31,6 +35,7 @@ function init(){
       whenSpacebarPressed = null;
       var launchEnergy = E_PER_MS_SPACE_IS_PRESSED * timeElapsed + MIN_E;
       scene.launchProbe(scene.planet, launchEnergy);
+      $('#launchbar').height('0px')
     }
   });
   

@@ -13,19 +13,23 @@
   </script>
   
 </head>
-<body>	
-    <div id='controls'>
-      Planet Fundamental Freq: 
-        <input id='planet-fundamental' value=".5" size="7">
-        </input> hz<br/>
-      Planet X Harmonic: 
-        <input id='planet-x-harmonic' value='3' size="7">
-        </input><br/>
-      Planet Y Harmonic: 
-        <input id='planet-y-harmonic' value='2' size="7">
-        </input><br/>
-    <button id='update'>Update</button>
+<body>
+  <div id='launchbar-container'>
+    <div id='launchbar'>
     </div>
+  </div>
+  <div id='controls'>
+    Planet Fundamental Freq: 
+      <input id='planet-fundamental' value=".5" size="7">
+      </input> hz<br/>
+    Planet X Harmonic: 
+      <input id='planet-x-harmonic' value='3' size="7">
+      </input><br/>
+    Planet Y Harmonic: 
+      <input id='planet-y-harmonic' value='2' size="7">
+      </input><br/>
+  <button id='update'>Update</button>
+  </div>
   <div class="three"></div>
   <script src="assets/lib/dat-gui/build/dat.gui.min.js"></script>
   <script src="assets/lib/jquery/dist/jquery.min.js"></script>
