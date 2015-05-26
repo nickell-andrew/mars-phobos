@@ -16,12 +16,21 @@ function init(){
   window.dbg.launch = function (e) { scene.launchProbe(scene.planet, e) };
 
   $(window).on('resize', resizeHandler);
+  $('#game-alert').hide() //FIXME I should replace the Alert in scene on object collision
+  
+  //Initializes sounds so they play responsively
+  var liftOffSound = new Audio("sounds/Missile_Launch.mp3");
+  var rocketBoosting = new Audio("sounds/Rocket.mp3")
+  
   
   var whenSpacebarPressed = null;
-  $(window).keydown(function (e) {
+  //Handler for Spacebar being held down and released
+  $(window).keydown(function (e) { 
     if (e.keyCode == 32) { 
       if (whenSpacebarPressed === null) {
         whenSpacebarPressed = Date.now();
+        rocketBoosting.currentTime = 0;
+        rocketBoosting.play();
       }
       $('#launchbar').css('height', "+=10%");
     }
@@ -30,8 +39,11 @@ function init(){
       var timeElapsed = Date.now() - whenSpacebarPressed;
       whenSpacebarPressed = null;
       var launchEnergy = E_PER_MS_SPACE_IS_PRESSED * timeElapsed + MIN_E;
+      
       scene.launchProbe(scene.planet, launchEnergy);
-      $('#launchbar').height('0px')
+      rocketBoosting.pause();
+      liftOffSound.play();
+      $('#launchbar').height('0px');
     }
   });
   
