@@ -16,7 +16,7 @@ function init(){
   window.dbg.launch = function (e) { scene.launchProbe(scene.planet, e) };
 
   $(window).on('resize', resizeHandler);
-  $('#game-alert').hide() //FIXME I should replace the Alert in scene on object collision
+  //$('#game-alert').hide() //FIXME I should replace the Alert in scene on object collision
   
   //Initializes sounds so they play responsively
   var liftOffSound = new Audio("sounds/Missile_Launch.mp3");
